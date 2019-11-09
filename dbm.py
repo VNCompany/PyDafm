@@ -127,7 +127,18 @@ class DataBaseManager:
 
     def get_priorities(self, ident=-1):
         if ident != -1:
-            
+            sql = "SELECT * FROM `priorities` WHERE `id`='" + ident + "'"
+            data = self._query(sql).fetchone()
+            id, name, color = data
+            return Priority(id, name, color)
+        else:
+            sql = "SELECT * FROM `priorities`"
+            data = self._query(sql).fetchall()
+            li = []
+            for d in data:
+                id, name, color = d
+                li.append(Priority(id, name, color))
+            return li
 
 
 dbm = DataBaseManager()
