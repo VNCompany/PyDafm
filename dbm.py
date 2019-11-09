@@ -140,6 +140,13 @@ class DataBaseManager:
                 li.append(Priority(id, name, color))
             return li
 
+    def get_debtors(self, name=None):
+        if name is not None:
+            sql = "SELECT * FROM `priorities` WHERE `name`='" + name + "'"
+            data = self._query(sql).fetchone()
+            id, nm, priority = data
+            return
+
 
 dbm = DataBaseManager()
 dbm.close()

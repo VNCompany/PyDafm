@@ -12,7 +12,7 @@ class Priority:
         return str(self.id)
 
 
-class Debtors:
+class Debtor:
     id = -1
     name = ""
     priority = 0
@@ -26,7 +26,7 @@ class Debtors:
         return str(self.name)
 
 
-class Debts:
+class Debt:
     id = -1
     debtor = ""
     amount = 0
