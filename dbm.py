@@ -125,9 +125,10 @@ class DataBaseManager:
         VALUES ('{0}', '{1}', '{2}', '{3}', {4})"""
         self._non_query(sql.format(debtor, str(amount), desc, str(priority), date), True)
 
+    def get_priorities(self, ident=-1):
+        if ident != -1:
+            
+
 
 dbm = DataBaseManager()
-dbm.add_debtor("Victor Sergeevich", 0)
-dbm.add_debt("Victor Sergeevich", 5000, "На ремонт ноутбука", 0)
-dbm.add_debt("Victor Sergeevich", 10000, "Новый ноутбук", 3, "2020-11-09")
 dbm.close()
