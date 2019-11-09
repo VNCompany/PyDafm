@@ -15,10 +15,20 @@ PRIORITY_LOW = 0
 PRIORITY_NORMAL = 1
 PRIORITY_MEDIUM = 2
 PRIORITY_HIGH = 3
-
 PRIORITIES_LIST = {
-    0: "Обычный",
-    1: "Низкий",
-    2: "Средний",
-    3: "Высокий"
+    "Обычный": 0,
+    "Низкий": 1,
+    "Средний": 2,
+    "Высокий": 3
+}
+
+DEBT_SORT_DEFAULT = 0
+DEBT_SORT_DEBTOR = 1
+DEBT_SORT_AMOUNT = 2
+DEBT_SORT_DATE = 3
+DEBT_SORT_LIST = {
+    "По новизне": 0,
+    "По алфавиту": 1,
+    "По сумме": 2,
+    "По дате": 3,
 }

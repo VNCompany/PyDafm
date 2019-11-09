@@ -127,26 +127,81 @@ class DataBaseManager:
 
     def get_priorities(self, ident=-1):
         if ident != -1:
-            sql = "SELECT * FROM `priorities` WHERE `id`='" + ident + "'"
+            sql = "SELECT * FROM `priorities` WHERE `id`='" + str(ident) + "'"
             data = self._query(sql).fetchone()
             id, name, color = data
-            return Priority(id, name, color)
+            return Priority(int(id), name, color)
         else:
             sql = "SELECT * FROM `priorities`"
             data = self._query(sql).fetchall()
             li = []
             for d in data:
                 id, name, color = d
-                li.append(Priority(id, name, color))
+                li.append(Priority(int(id), name, color))
             return li
 
     def get_debtors(self, name=None):
         if name is not None:
-            sql = "SELECT * FROM `priorities` WHERE `name`='" + name + "'"
+            sql = "SELECT * FROM `debtors` WHERE `name`='" + name + "'"
             data = self._query(sql).fetchone()
             id, nm, priority = data
-            return
+            return Debtor(int(id), name, int(priority))
+        else:
+            sql = "SELECT * FROM `debtors`"
+            data = self._query(sql).fetchall()
+            li = []
+            for d in data:
+                id, nm, priority = d
+                li.append(Debtor(int(id), nm, int(priority)))
+            return li
+
+    def get_debts(self, id=None, sorting=0):
+        if id is not None:
+            sql = "SELECT * FROM `debts` WHERE `id`='" + str(id) + "'"
+            data = self._query(sql).fetchone()
+            id, dbt, amount, desc, priority, date = data
+            return Debt(int(id), dbt, int(amount), desc, int(priority), date)
+        else:
+            order = ""
+            if sorting == DEBT_SORT_DEFAULT:
+                order = "`id` DESC"
+            if sorting == DEBT_SORT_AMOUNT:
+                order = "`amount` DESC"
+            if sorting == DEBT_SORT_DATE:
+                order = "`date` DESC"
+            if sorting == DEBT_SORT_DEBTOR:
+                order = "`debtor` ASC"
+
+            sql = "SELECT * FROM `debts` ORDER BY " + order
+            data = self._query(sql).fetchall()
+            li = []
+            for d in data:
+                id, dbt, amount, desc, priority, date = d
+                li.append(Debt(int(id), dbt, int(amount), desc, int(priority), date))
+            return li
+
+    def get_debts_by_debtor(self, debtor: str, sorting=0):
+        order = ""
+        if sorting == DEBT_SORT_DEFAULT:
+            order = "`id` DESC"
+        if sorting == DEBT_SORT_AMOUNT:
+            order = "`amount` DESC"
+        if sorting == DEBT_SORT_DATE:
+            order = "`date` DESC"
+        if sorting == DEBT_SORT_DEBTOR:
+            order = "`debtor` ASC"
+
+        sql = "SELECT * FROM `debts` WHERE `debtor`='" + debtor + "' ORDER BY " + order
+        data = self._query(sql).fetchall()
+        li = []
+        for d in data:
+            id, dbt, amount, desc, priority, date = d
+            li.append(Debt(int(id), dbt, int(amount), desc, int(priority), date))
+        return li
 
 
 dbm = DataBaseManager()
+debts = dbm.get_debts(sorting=DEBT_SORT_DEBTOR)
+for i in debts:
+    print(i.amount)
 dbm.close()

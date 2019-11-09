@@ -13,10 +13,3 @@ class LogManager:
 
     def close(self):
         self.file.close()
-
-
-lm = LogManager()
-lm.append(LOG_ERROR, "You are person!")
-lm.append(LOG_INFORMATION, "You are person!")
-lm.append(LOG_WARNING, "You are person!")
-lm.close()
