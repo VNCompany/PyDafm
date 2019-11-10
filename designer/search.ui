@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>637</width>
-    <height>300</height>
+    <width>658</width>
+    <height>364</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -39,9 +39,9 @@
 }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
+   <item row="1" column="0">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="2">
+     <item row="1" column="2">
       <widget class="QComboBox" name="search_list">
        <property name="minimumSize">
         <size>
@@ -91,11 +91,11 @@
        </item>
       </widget>
      </item>
-     <item row="0" column="1" alignment="Qt::AlignTop">
+     <item row="1" column="1" alignment="Qt::AlignTop">
       <widget class="QLineEdit" name="search_text">
        <property name="maximumSize">
         <size>
-         <width>300</width>
+         <width>320</width>
          <height>16777215</height>
         </size>
        </property>
@@ -112,13 +112,6 @@ padding: 5px</string>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QCheckBox" name="search_case">
-       <property name="text">
-        <string>Чувствителен к регистру</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
@@ -130,7 +123,7 @@ padding: 5px</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1" alignment="Qt::AlignHCenter">
+     <item row="3" column="1" alignment="Qt::AlignHCenter">
       <widget class="QPushButton" name="search_btn">
        <property name="minimumSize">
         <size>
@@ -163,6 +156,37 @@ padding: 5px</string>
        </property>
        <property name="text">
         <string>Найти</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="QCheckBox" name="search_case">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">margin-top: 25px;</string>
+       </property>
+       <property name="text">
+        <string>Чувствителен к регистру</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QCalendarWidget" name="calendar">
+       <property name="maximumSize">
+        <size>
+         <width>320</width>
+         <height>165</height>
+        </size>
+       </property>
+       <property name="gridVisible">
+        <bool>false</bool>
+       </property>
+       <property name="navigationBarVisible">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

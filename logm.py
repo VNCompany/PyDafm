@@ -1,5 +1,4 @@
 import time
-from defines import *
 
 
 class LogManager:

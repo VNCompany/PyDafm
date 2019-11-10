@@ -6,6 +6,8 @@ from PyQt5 import uic
 
 from dbm import *
 from custom_dialog import CustomDialog
+from searcher import Searcher
+from debt_editor import DebtEditor
 
 
 class Main(QMainWindow):
@@ -19,7 +21,9 @@ class Main(QMainWindow):
         self.update_monitor()
 
         self.sorting_list.currentIndexChanged.connect(self.sorting_type_changed)
-        self.refresh_btn.clicked.connect(self.update_monitor)
+        self.refresh_btn.clicked.connect(self.refresh_button_clicked)
+        self.action_5.triggered.connect(self.search_element_clicked)
+        self.action.triggered.connect(self.add_new_debt_clicked)
 
         # Header width
         self.monitor_table.setColumnWidth(0, 50)
@@ -93,28 +97,56 @@ class Main(QMainWindow):
 
     def search(self, all_debts, search_string: str, columns, case_sensitive: bool):
         searcher = []
-        if case_sensitive:
+        if not case_sensitive:
             search_string = search_string.lower()
         for debt in all_debts:
+            li = PRIORITIES_LIST2.copy()
+            if not case_sensitive:
+                for k in li.keys():
+                    li[k] = li[k].lower()
+
+            debtor = debt.debtor
+            desc = debt.description
+            if not case_sensitive:
+                debtor = str(debt.debtor).lower()
+                desc = str(debt.description).lower()
+
             if columns == 0:
                 if search_string == str(debt.id) or \
-                        search_string in debt.debtor or \
+                        search_string in debtor or \
                         search_string == str(debt.amount) or \
-                        search_string in debt.description or \
-                        search_string in PRIORITIES_LIST2[int(debt.priority)] or \
+                        search_string in desc or \
+                        search_string in li[int(debt.priority)] or \
                         search_string in self.dbm.strd_from_str(debt.date):
                     searcher.append(debt)
             elif columns == 1 and search_string == str(debt.id):
                 searcher.append(debt)
-            elif columns == 2 and search_string in PRIORITIES_LIST2[int(debt.priority)]:
+            elif columns == 2 and search_string in li[int(debt.priority)]:
                 searcher.append(debt)
-            elif columns == 3 and search_string in debt.debtor:
+            elif columns == 3 and search_string in debtor:
                 searcher.append(debt)
             elif columns == 4 and search_string == str(debt.amount):
                 searcher.append(debt)
-            elif columns == 5 and search_string in str(debt.description):
+            elif columns == 5 and search_string in str(desc):
                 searcher.append(debt)
             elif columns == 6 and (search_string in self.dbm.strd_from_str(debt.date) or
                                    search_string in debt.date):
                 searcher.append(debt)
         return searcher
+
+    def search_element_clicked(self):
+        searcher = Searcher()
+        searcher.exec_()
+        if searcher.result == 1:
+            result = self.search(self.dbm.get_debts(sorting=self.sorting_list.currentIndex()),
+                                 searcher.search_string,
+                                 searcher.search_columns,
+                                 searcher.case_im)
+            self.update_monitor(result)
+
+    def refresh_button_clicked(self):
+        self.update_monitor()
+
+    def add_new_debt_clicked(self):
+        de = DebtEditor(self.dbm)
+        de.exec_()
