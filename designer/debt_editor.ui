@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Долг</string>
   </property>
   <property name="styleSheet">
    <string notr="true">#new_debtor_btn,#add_btn{
@@ -66,6 +66,9 @@
        </property>
        <property name="text">
         <string>Новый</string>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+N</string>
        </property>
       </widget>
      </item>

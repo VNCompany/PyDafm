@@ -11,7 +11,8 @@ class Registration(QDialog):
         uic.loadUi("designer/registration.ui", self)
         self.setWindowTitle("Регистрация")
         self.dbm = DataBaseManager()
-        self.mn = Main(self.dbm)
+        self.mn = None
+        self.result = -1
         self.auth_btn.clicked.connect(self.auth_clicked)
 
     def auth_clicked(self):
@@ -26,6 +27,7 @@ class Registration(QDialog):
                     self.dbm.set_auth_data(login, pw)
                     if os.path.exists("startup"):
                         os.remove("startup")
+                    self.mn = Main(self.dbm)
                     self.mn.show()
                     self.hide()
                 else:

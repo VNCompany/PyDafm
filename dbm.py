@@ -90,6 +90,39 @@ class DataBaseManager:
             self.log.append(LOG_ERROR, "Fatal error on auth. " + str(ex))
             return False
 
+    def valid_password(self, password: str):
+        try:
+            data = self._query("SELECT `value` FROM `head_data`").fetchall()
+            v_login, v_pw = data[0][0], data[1][0]
+            password = self.md5(password)
+            return v_pw == password
+        except Exception as ex:
+            self.log.append(LOG_ERROR, "Fatal error on auth. " + str(ex))
+            return False
+
+    def get_login(self):
+        try:
+            data = self._query("SELECT `value` FROM `head_data`").fetchall()
+            v_login, v_pw = data[0][0], data[1][0]
+            return v_login
+        except Exception as ex:
+            self.log.append(LOG_ERROR, "Fatal error on auth. " + str(ex))
+            return None
+
+    def edit_login(self, new_login: str):
+        try:
+            self._non_query("UPDATE `head_data` SET `value`='" + new_login +
+                            "' WHERE `setting`='login'", True)
+        except Exception as ex:
+            self.log.append(LOG_ERROR, "Fatal error on auth. " + str(ex))
+
+    def edit_pw(self, new_pw: str):
+        try:
+            self._non_query("UPDATE `head_data` SET `value`='" + self.md5(new_pw) +
+                            "' WHERE `setting`='pw'", True)
+        except Exception as ex:
+            self.log.append(LOG_ERROR, "Fatal error on auth. " + str(ex))
+
     def create_priories(self):
         sql = """INSERT INTO `priorities`(`id`, `name`, `color`) VALUES
         (0, 'Обычный', '#FFFFFF'),

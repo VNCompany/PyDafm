@@ -360,11 +360,6 @@
     <addaction name="action_3"/>
     <addaction name="action_4"/>
    </widget>
-   <widget class="QMenu" name="menu_3">
-    <property name="title">
-     <string>Справка</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="search_menu">
     <property name="title">
      <string>Поиск</string>
@@ -374,7 +369,6 @@
    <addaction name="menu"/>
    <addaction name="search_menu"/>
    <addaction name="menu_2"/>
-   <addaction name="menu_3"/>
   </widget>
   <action name="action">
    <property name="text">
@@ -387,6 +381,9 @@
   <action name="action_2">
    <property name="text">
     <string>Задолжники</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
    </property>
   </action>
   <action name="action_3">

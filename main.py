@@ -1,13 +1,15 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidget, QTableWidgetItem, QAction
 from PyQt5.QtWidgets import QHeaderView
-from PyQt5.QtGui import QColor, QIcon
+from PyQt5.QtGui import QColor, QIcon, QKeyEvent
 from PyQt5.QtCore import Qt
 from PyQt5 import uic
+import os
 
 from dbm import *
 from custom_dialog import CustomDialog
 from searcher import Searcher
 from debt_editor import DebtEditor
+from data_auth import DataAuthEditor
 
 
 class Main(QMainWindow):
@@ -23,6 +25,8 @@ class Main(QMainWindow):
         self.sorting_list.currentIndexChanged.connect(self.sorting_type_changed)
         self.refresh_btn.clicked.connect(self.refresh_button_clicked)
         self.action_5.triggered.connect(self.search_element_clicked)
+        self.action_3.triggered.connect(self.edit_auth_data)
+        self.action_4.triggered.connect(self.reset_all)
         self.action.triggered.connect(self.add_new_debt_clicked)
 
         # Header width
@@ -150,3 +154,34 @@ class Main(QMainWindow):
     def add_new_debt_clicked(self):
         de = DebtEditor(self.dbm)
         de.exec_()
+        if de.result == 1:
+            debt = de.debt
+            self.dbm.add_debt(debt.debtor,
+                              int(debt.amount),
+                              debt.description,
+                              int(debt.priority),
+                              debt.date)
+            self.update_monitor()
+
+    def keyPressEvent(self, event: QKeyEvent):
+        if event.key() == Qt.Key_Delete:
+            self.delete_trigger()
+
+    def edit_auth_data(self):
+        da = DataAuthEditor(self.dbm)
+        da.exec_()
+
+    def closeEvent(self, event):
+        self.finish()
+
+    def finish(self):
+        try:
+            self.dbm.close()
+        except Exception:
+            return
+
+    def reset_all(self):
+        self.finish()
+        os.remove("base.db")
+        open("startup", "w").write("")
+        self.close()

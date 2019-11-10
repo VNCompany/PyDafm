@@ -1,6 +1,7 @@
 from PyQt5 import uic
-from PyQt5.QtWidgets import QDialog
-from PyQt5.QtCore import QDate
+from PyQt5.QtWidgets import QDialog, QMessageBox
+from PyQt5.QtCore import QDate, Qt
+from PyQt5.QtGui import QKeyEvent
 from dbm import *
 from debtor_editor import DebtorEditor
 
@@ -11,6 +12,7 @@ class DebtEditor(QDialog):
         uic.loadUi("designer/debt_editor.ui", self)
         self.id = 0
         self.result = -1
+        self.debt = None
 
         self.dbm = dbm
 
@@ -51,7 +53,15 @@ class DebtEditor(QDialog):
         return debt
 
     def add_clicked(self):
-        print(self.debtor_value.currentText())
+        if self.debtor_value.currentText() == "" or \
+                self.debtor_value.currentText() not in self.debtors_list:
+            QMessageBox.warning(self, "Ошибка", "Введите существующего пользователя!")
+            return
+        debt = self.get_values(self.dbm.get_debtors(self.debtor_value.currentText()).priority) \
+            if self.debtor_priority.isChecked() else self.get_values()
+        self.debt = debt
+        self.result = 1
+        self.close()
 
     def dp_check_changed(self):
         if self.sender().isChecked():
@@ -72,3 +82,9 @@ class DebtEditor(QDialog):
             self.dbm.add_debtor(add_debtor.debtor.name, add_debtor.debtor.priority)
             self.debtors_list = list(map(lambda l: l.name, self.dbm.get_debtors()))
             self.add_items_on_dlist()
+            self.debtor_value.setCurrentText(add_debtor.debtor.name)
+
+    def keyPressEvent(self, event: QKeyEvent):
+        if int(event.modifiers()) == Qt.ControlModifier:
+            if event.key() == Qt.Key_N:
+                self.add_new_debtor()
