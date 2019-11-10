@@ -1,11 +1,17 @@
 import sys
 from PyQt5.QtWidgets import QApplication
-from forms.main import Main
+from auth import Authorization
+from register import Registration
+import os.path
 
 
 # Главное вхождение программы
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    main_window = Main()
-    main_window.show()
+    if not os.path.exists("startup"):
+        main_form = Authorization()
+        main_form.show()
+    else:
+        main_form = Registration()
+        main_form.show()
     sys.exit(app.exec_())

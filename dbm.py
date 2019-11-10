@@ -16,20 +16,10 @@ class DataBaseManager:
         date = date.split("-")
         return str(int(date[2])) + " " + DATE_DICT[str(int(date[1]))] + " " + str(int(date[0]))
 
-    @staticmethod
-    def html_to_rgb(color: str):
-        color_string = color.strip()
-        if color_string[0] == '#': color_string = color_string[1:]
-        r, g, b = color_string[:2], color_string[2:4], color_string[4:]
-        r, g, b = [int(n, 16) for n in (r, g, b)]
-        return r, g, b
-
     def __init__(self):
         self.sql = sqlite3.connect("base.db")
         self.conn = self.sql.cursor()
         self.log = LogManager()
-
-        self.create_all_tables()
 
     def _non_query(self, cmd: str, commit=False):
         self.conn.execute(cmd)
@@ -199,9 +189,11 @@ class DataBaseManager:
             li.append(Debt(int(id), dbt, int(amount), desc, int(priority), date))
         return li
 
+    def get_debtors_count(self):
+        sql = "SELECT COUNT(*) FROM `debtors`"
+        data = self._query(sql).fetchone()
+        return int(data[0])
 
-dbm = DataBaseManager()
-debts = dbm.get_debts(sorting=DEBT_SORT_DEBTOR)
-for i in debts:
-    print(i.amount)
-dbm.close()
+    def delete_debt(self, id):
+        sql = "DELETE FROM `debts` WHERE `id`='" + str(id) + "'"
+        self._non_query(sql, True)
