@@ -12,6 +12,7 @@ from searcher import Searcher
 from debt_editor import DebtEditor
 from data_auth import DataAuthEditor
 from debtors_menu import DebtorsMenu
+from debt_info import DebtInfo
 
 from xls_worker import XlsReader, XlsWriter
 
@@ -52,6 +53,7 @@ class Main(QMainWindow):
 
         self.monitor_table.addAction(act)
         self.monitor_table.addAction(act2)
+        self.monitor_table.itemDoubleClicked.connect(self.show_debt_info)
 
     def update_monitor(self, debts=None):
         if debts is None:
@@ -307,3 +309,16 @@ class Main(QMainWindow):
             if de.result == 1:
                 self.dbm.edit_debt(de.debt)
                 self.update_monitor()
+
+    def show_debt_info(self, item: QTableWidgetItem):
+        if item is not None:
+            row = item.row()
+            id = self.monitor_table.item(row, 0).text()
+            debt = self.dbm.get_debts(int(id))
+            old_amount = debt.amount
+            di = DebtInfo(self.dbm, debt)
+            di.exec_()
+
+            if di.amount != old_amount:
+                self.update_statistic()
+                self.monitor_table.item(row, 3).setText(str(di.amount))
