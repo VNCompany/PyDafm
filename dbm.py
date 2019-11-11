@@ -194,6 +194,8 @@ class DataBaseManager:
                 order = "`date` DESC"
             if sorting == DEBT_SORT_DEBTOR:
                 order = "`debtor` ASC"
+            if sorting == 4:
+                order = "`priority` DESC"
 
             sql = "SELECT * FROM `debts` ORDER BY " + order
             data = self._query(sql).fetchall()
@@ -213,6 +215,8 @@ class DataBaseManager:
             order = "`date` DESC"
         if sorting == DEBT_SORT_DEBTOR:
             order = "`debtor` ASC"
+        if sorting == 4:
+            order = "`priority` DESC"
 
         sql = "SELECT * FROM `debts` WHERE `debtor`='" + debtor + "' ORDER BY " + order
         data = self._query(sql).fetchall()
@@ -230,3 +234,15 @@ class DataBaseManager:
     def delete_debt(self, id):
         sql = "DELETE FROM `debts` WHERE `id`='" + str(id) + "'"
         self._non_query(sql, True)
+
+    def delete_debtor(self, debtor: str):
+        sql = "DELETE FROM `debtors` WHERE `name`='" + debtor + "'"
+        sql2 = "DELETE FROM `debts` WHERE `debtor`='" + debtor + "'"
+        self._non_query(sql, True)
+        self._non_query(sql2, True)
+
+    def edit_debtor(self, debtor: Debtor, old_debtor: str):
+        sql = "UPDATE `debtors` SET `name`='{0}', `priority`='{1}' WHERE `id`='{2}'"
+        self._non_query(sql.format(debtor.name, str(debtor.priority), str(debtor.id)), True)
+        sql = "UPDATE `debts` SET `debtor`='{0}' WHERE `debtor`='{1}'"
+        self._non_query(sql.format(debtor.name, old_debtor), True)

@@ -1,15 +1,19 @@
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidget, QTableWidgetItem, QAction
-from PyQt5.QtWidgets import QHeaderView
+from PyQt5.QtWidgets import QHeaderView, QFileDialog, QMessageBox
 from PyQt5.QtGui import QColor, QIcon, QKeyEvent
 from PyQt5.QtCore import Qt
 from PyQt5 import uic
 import os
+from datetime import date
 
 from dbm import *
 from custom_dialog import CustomDialog
 from searcher import Searcher
 from debt_editor import DebtEditor
 from data_auth import DataAuthEditor
+from debtors_menu import DebtorsMenu
+
+from xls_worker import XlsReader, XlsWriter
 
 
 class Main(QMainWindow):
@@ -27,6 +31,9 @@ class Main(QMainWindow):
         self.action_5.triggered.connect(self.search_element_clicked)
         self.action_3.triggered.connect(self.edit_auth_data)
         self.action_4.triggered.connect(self.reset_all)
+        self.action_2.triggered.connect(self.show_debtors_menu)
+        self.action_8.triggered.connect(self.export)
+        self.action_7.triggered.connect(self.import_debts)
         self.action.triggered.connect(self.add_new_debt_clicked)
 
         # Header width
@@ -177,11 +184,109 @@ class Main(QMainWindow):
     def finish(self):
         try:
             self.dbm.close()
-        except Exception:
-            return
+        except:
+            pass
 
     def reset_all(self):
-        self.finish()
-        os.remove("base.db")
-        open("startup", "w").write("")
-        self.close()
+        try:
+            self.dbm.close()
+            self.close()
+            os.remove("base.db")
+            open("startup", "w").write("")
+        except:
+            pass
+
+    def show_debtors_menu(self):
+        dm = DebtorsMenu(self.dbm)
+        dm.exec_()
+        if dm.update_main_list:
+            self.update_monitor()
+        else:
+            self.update_statistic()
+
+    def export(self):
+        try:
+            fname = QFileDialog.getSaveFileName(self, "Сохранить", "dafm_table.xls",
+                                                "XLS Files(*.xls)")
+            if fname[0] is not None and fname[0] != "":
+                xw = XlsWriter(fname[0])
+                headers = ["Приоритет", "Задолжник", "Сумма", "Описание", "Дата"]
+                table = list()
+                table.append(headers)
+                for debt in self.dbm.get_debts():
+                    table.append([PRIORITIES_LIST2[debt.priority],
+                                  debt.debtor,
+                                  str(debt.amount),
+                                  debt.description,
+                                  debt.date])
+                xw.add_sheet("Долги", table)
+
+                headers = ["Приоритет", "Имя"]
+                table = list()
+                table.append(headers)
+                for debtor in self.dbm.get_debtors():
+                    table.append([PRIORITIES_LIST2[debtor.priority], debtor.name])
+                xw.add_sheet("Должники", table)
+
+                xw.save()
+                QMessageBox.information(self, "Информация", "Экспорт успешно завершён")
+        except Exception as ex:
+            QMessageBox.information(self, "Информация", "При экспорте произошла ошибка. "
+                                                        "Запись сохранена в лог.")
+            self.dbm.log.append(str(ex))
+
+    @staticmethod
+    def check_valid_date(dt: str):
+        try:
+            y, m, d = [int(i) for i in dt.split("-")]
+            date(y, m, d)
+            return True
+        except:
+            return False
+
+    def import_debts(self):
+        try:
+            fname = QFileDialog.getOpenFileName(self, "Открыть", "",
+                                                "XLS Files(*.xls)")
+            if fname[0] is not None and fname[0] != "":
+                xw = XlsReader(fname[0])
+                data = xw.read_data(1)
+
+                if data is None:
+                    QMessageBox.information(self, "Информация", "Ошибка чтения таблицы")
+                    return
+
+                existed_debtors = list(map(lambda t: t.name, self.dbm.get_debtors()))
+                if len(data) < 1:
+                    QMessageBox.information(self, "Информация", "Пустая таблица")
+                    return
+
+                if len(data[0]) != 5:
+                    QMessageBox.information(self, "Информация", "Неверный формат таблицы")
+                    return
+
+                for dat in data:
+                    try:
+                        priority, debtor, amount, desc, dt = dat
+                        if (priority[1] in PRIORITIES_LIST.keys()) and \
+                                debtor[1] != "" and \
+                                amount[1] != "" and \
+                                self.check_valid_date(dt[1]):
+                            amount = str(amount[1]).split(".")[0]
+                            self.dbm.add_debt(debtor[1],
+                                              int(amount),
+                                              desc[1],
+                                              PRIORITIES_LIST[priority[1]],
+                                              dt[1])
+                            if debtor[1] not in existed_debtors:
+                                self.dbm.add_debtor(debtor[1], 0)
+                                existed_debtors.append(debtor[1])
+                        else:
+                            print("no")
+                    except Exception as ex:
+                        print(ex)
+
+                QMessageBox.information(self, "Информация", "Импорт успешно завершён")
+                self.update_monitor()
+        except Exception as ex:
+            QMessageBox.information(self, "Информация", "При импорте произошла ошибка. " + str(ex))

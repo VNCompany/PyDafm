@@ -20,7 +20,7 @@ class DebtEditor(QDialog):
         self.add_items_on_dlist()
 
         if debt is not None:
-            self.add_btn.setText("Редактировать")
+            self.add_btn.setText("Изменить")
             self.set_values(debt)
 
         self.debtor_priority.setChecked(True)

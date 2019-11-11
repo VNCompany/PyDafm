@@ -92,6 +92,11 @@
                 <string>По дате</string>
                </property>
               </item>
+              <item>
+               <property name="text">
+                <string>По приоритету</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="0" column="0">
@@ -350,8 +355,16 @@
     <property name="title">
      <string>База</string>
     </property>
+    <widget class="QMenu" name="menu_3">
+     <property name="title">
+      <string>Импорт/Экспорт</string>
+     </property>
+     <addaction name="action_7"/>
+     <addaction name="action_8"/>
+    </widget>
     <addaction name="action"/>
     <addaction name="action_2"/>
+    <addaction name="menu_3"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -402,6 +415,16 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="action_7">
+   <property name="text">
+    <string>Импортировать долги</string>
+   </property>
+  </action>
+  <action name="action_8">
+   <property name="text">
+    <string>Экспортировать долги и должников</string>
    </property>
   </action>
  </widget>

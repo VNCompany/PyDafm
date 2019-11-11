@@ -17,7 +17,7 @@ class DebtorEditor(QDialog):
 
         if debtor is not None:
             self.set_values(debtor)
-            self.add_btn.setText("Редактировать")
+            self.add_btn.setText("Изменить")
             self.ignore_exists = True
 
         self.add_btn.clicked.connect(self.add_clicked)
@@ -25,7 +25,7 @@ class DebtorEditor(QDialog):
     def set_values(self, debtor: Debtor):
         self.name_value.setText(debtor.name)
         self.priority_value.setCurrentIndex(debtor.priority)
-        self.id = debtor.priority
+        self.id = debtor.id
 
     def get_values(self):
         name = self.name_value.text()
