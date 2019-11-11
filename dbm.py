@@ -246,3 +246,19 @@ class DataBaseManager:
         self._non_query(sql.format(debtor.name, str(debtor.priority), str(debtor.id)), True)
         sql = "UPDATE `debts` SET `debtor`='{0}' WHERE `debtor`='{1}'"
         self._non_query(sql.format(debtor.name, old_debtor), True)
+
+    def edit_debt(self, debt: Debt):
+        sql = "UPDATE `debts` SET `debtor`='{0}', `amount`='{1}', `desc`='{2}'," \
+              " `priority`='{3}', `date`='{4}' WHERE `id`='{5}'"
+        self._non_query(sql.format(debt.debtor,
+                                   str(debt.amount),
+                                   debt.description,
+                                   str(debt.priority),
+                                   debt.date,
+                                   str(debt.id)), True)
+
+    def add_payment(self, id, callback):
+        sql = "SELECT `amount` FROM `debts` WHERE `id`='" + str(id) + "'"
+        data = self._query(sql).fetchone()[0]
+        sql = "UPDATE `debts` SET `amount`='" + callback(data) + "' WHERE `id`='" + str(id) + "'"
+        self._non_query(sql, True)

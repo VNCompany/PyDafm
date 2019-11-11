@@ -47,8 +47,11 @@ class Main(QMainWindow):
         # Context menu
         act = QAction("Удалить", self)
         act.triggered.connect(self.delete_trigger)
+        act2 = QAction("Изменить", self)
+        act2.triggered.connect(self.edit_debt)
 
         self.monitor_table.addAction(act)
+        self.monitor_table.addAction(act2)
 
     def update_monitor(self, debts=None):
         if debts is None:
@@ -290,3 +293,17 @@ class Main(QMainWindow):
                 self.update_monitor()
         except Exception as ex:
             QMessageBox.information(self, "Информация", "При импорте произошла ошибка. " + str(ex))
+
+    def edit_debt(self):
+        sel_items = self.monitor_table.selectedItems()
+        if len(sel_items) == 1:
+            row = sel_items[0].row()
+            id = self.monitor_table.item(row, 0).text()
+            debt = self.dbm.get_debts(int(id))
+
+            de = DebtEditor(self.dbm, debt)
+            de.exec_()
+
+            if de.result == 1:
+                self.dbm.edit_debt(de.debt)
+                self.update_monitor()

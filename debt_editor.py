@@ -19,12 +19,12 @@ class DebtEditor(QDialog):
         self.debtors_list = list(map(lambda l: l.name, dbm.get_debtors()))
         self.add_items_on_dlist()
 
+        self.debtor_priority.setChecked(True)
+        self.priority_value.setEnabled(False)
+
         if debt is not None:
             self.add_btn.setText("Изменить")
             self.set_values(debt)
-
-        self.debtor_priority.setChecked(True)
-        self.priority_value.setEnabled(False)
 
         self.add_btn.clicked.connect(self.add_clicked)
         self.debtor_priority.stateChanged.connect(self.dp_check_changed)

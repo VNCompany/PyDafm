@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cfbae562-810c-400f-8fb2-6c3b756709f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/debtors_menu.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/designer/debtors_menu.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xls_worker.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dbm.py" beforeDir="false" afterPath="$PROJECT_DIR$/dbm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debt_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/debt_editor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debtor_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/debtor_editor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/defines.py" beforeDir="false" afterPath="$PROJECT_DIR$/defines.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/designer/main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/designer/main.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +15,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/DAFManager$logm.coverage" NAME="logm Coverage Results" MODIFIED="1573302729118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/PyDafm$DAFManager.coverage" NAME="DAFManager Coverage Results" MODIFIED="1573497325585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PyDafm$DAFManager.coverage" NAME="DAFManager Coverage Results" MODIFIED="1573498664865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PyDafm$dbm.coverage" NAME="dbm Coverage Results" MODIFIED="1573327344081" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PyDafm$main.coverage" NAME="main Coverage Results" MODIFIED="1573330591844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/forms" />
     <SUITE FILE_PATH="coverage/PyDafm$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1573422497915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -47,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dbm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="248" selection-start-line="248" selection-end-line="248" />
+            <state relative-caret-position="567">
+              <caret line="264" lean-forward="true" selection-start-line="264" selection-end-line="264" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -56,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="567">
-              <caret line="292" lean-forward="true" selection-start-line="292" selection-end-line="292" />
+              <caret line="309" lean-forward="true" selection-start-line="309" selection-end-line="309" />
               <folding>
                 <element signature="e#0#94#0" expanded="true" />
               </folding>
@@ -113,6 +107,18 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/debt_editor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -140,12 +146,12 @@
         <option value="$PROJECT_DIR$/register.py" />
         <option value="$PROJECT_DIR$/xlsx_worker.py" />
         <option value="$PROJECT_DIR$/defines.py" />
-        <option value="$PROJECT_DIR$/debt_editor.py" />
         <option value="$PROJECT_DIR$/debtor_editor.py" />
         <option value="$PROJECT_DIR$/debtors_menu.py" />
         <option value="$PROJECT_DIR$/xls_worker.py" />
         <option value="$PROJECT_DIR$/dbm.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/debt_editor.py" />
       </list>
     </option>
   </component>
@@ -348,7 +354,7 @@
       <workItem from="1573370882545" duration="14488000" />
       <workItem from="1573396208417" duration="23378000" />
       <workItem from="1573424155392" duration="108000" />
-      <workItem from="1573477900254" duration="17262000" />
+      <workItem from="1573477900254" duration="18613000" />
     </task>
     <task id="LOCAL-00001" summary="Added method &quot;get_priorities&quot;">
       <created>1573317770449</created>
@@ -399,11 +405,18 @@
       <option name="project" value="LOCAL" />
       <updated>1573424238348</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="PreReady. Time: edit_debts, add_viplata">
+      <created>1573497391332</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1573497391332</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86156000" />
+    <option name="totallyTimeSpent" value="87507000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -418,12 +431,12 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26599148" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26599148" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32967034" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840087" visible="true" weight="0.20549451" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49840087" visible="true" weight="0.20549451" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -464,7 +477,8 @@
     <MESSAGE value="Many changes 1" />
     <MESSAGE value="Added debt_editor and debtor_editor (Full Func)" />
     <MESSAGE value="PreReady. Time: edit_debtors and edit_debts" />
-    <option name="LAST_COMMIT_MESSAGE" value="PreReady. Time: edit_debtors and edit_debts" />
+    <MESSAGE value="PreReady. Time: edit_debts, add_viplata" />
+    <option name="LAST_COMMIT_MESSAGE" value="PreReady. Time: edit_debts, add_viplata" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
@@ -548,42 +562,12 @@
     <entry file="file://$PROJECT_DIR$/designer/debt_editor.ui">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/debt_editor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-36">
-          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/debtors_menu.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
           <caret line="79" selection-start-line="79" selection-end-line="79" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/debtor_editor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dbm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="248" selection-start-line="248" selection-end-line="248" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -608,12 +592,42 @@
     <entry file="file://$PROJECT_DIR$/log.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/dbm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="264" lean-forward="true" selection-start-line="264" selection-end-line="264" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
-          <caret line="292" lean-forward="true" selection-start-line="292" selection-end-line="292" />
+          <caret line="309" lean-forward="true" selection-start-line="309" selection-end-line="309" />
           <folding>
             <element signature="e#0#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debtor_editor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debt_editor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
